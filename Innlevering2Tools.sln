@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2017
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Innlevering2Tools", "Innlevering2Tools.csproj", "{A686F77E-C89B-D9BB-5CC8-9ED6D81AD53C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Innlevering2Tools.Editor", "Innlevering2Tools.Editor.csproj", "{80A873AE-6DED-BED4-4E26-12A3F7F7DC3B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A686F77E-C89B-D9BB-5CC8-9ED6D81AD53C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A686F77E-C89B-D9BB-5CC8-9ED6D81AD53C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A686F77E-C89B-D9BB-5CC8-9ED6D81AD53C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A686F77E-C89B-D9BB-5CC8-9ED6D81AD53C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80A873AE-6DED-BED4-4E26-12A3F7F7DC3B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80A873AE-6DED-BED4-4E26-12A3F7F7DC3B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80A873AE-6DED-BED4-4E26-12A3F7F7DC3B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80A873AE-6DED-BED4-4E26-12A3F7F7DC3B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
