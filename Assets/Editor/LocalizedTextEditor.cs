@@ -17,7 +17,7 @@ public class LocalizedTextEditor : Editor {
         if (editor != null) {
             _languages = editor.LocalizedLanguages;
             _activeLanguage = editor.ActiveLanguage;
-            localText.Text = localText.gameObject.GetComponent<Text>();
+            //localText.Text = localText.gameObject.GetComponent<Text>(); 
         }
 
         if (_languages != null && _languages.Count > 0 && _languages[_activeLanguage].KeyPhrases.Count > 0) {

@@ -90,7 +90,6 @@ public class LocalizationTool : EditorWindow
             {
                 var newLocalizedLanguage = CreateInstance<LocalizedLanguage>();
                 newLocalizedLanguage.LanguageName = _newLanguageName;
-                //newLocalizedLanguage.KeyPhrases = new List<KeyPhrase>();
 
                 if (LocalizedLanguages.Count > 0)
                 {
@@ -162,29 +161,27 @@ public class LocalizationTool : EditorWindow
 
         //TODO: Export til JSON
         if (GUILayout.Button("Export to JSON")) {
-            var json = JsonUtility.ToJson(LocalizedLanguages[_currentLanguage]);
+            var language = LocalizedLanguages[_currentLanguage];
+            var json = JsonUtility.ToJson(language);
             Debug.Log(json);
 
-            //SaveFileDialog saveFileDialog1 = new SaveFileDialog();
-
-            //saveFileDialog1.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
-            //saveFileDialog1.FilterIndex = 2;
-            //saveFileDialog1.RestoreDirectory = true;
-
-            //if (saveFileDialog1.ShowDialog() == DialogResult.OK)
-            //{
-            //    if ((myStream = saveFileDialog1.OpenFile()) != null)
-            //    {
-            //        // Code to write the stream goes here.
-            //        myStream.Close();
-            //    }
-            //}
+            var savePath = EditorUtility.SaveFilePanel("Save location", "", language.LanguageName, "json");
+            
+            if (!String.IsNullOrEmpty(savePath))
+                File.WriteAllBytes(savePath, System.Text.Encoding.UTF8.GetBytes(json));
         }
 
         //TODO: Hente fra JSON
-        if (GUILayout.Button("Load from JSON"))
-        {
-            
+        if (GUILayout.Button("Load from JSON")) {
+            var loadPath = EditorUtility.OpenFilePanel("Open language file", "", "json");
+            if (!String.IsNullOrEmpty(loadPath)) {
+                var fileBytes = File.ReadAllBytes(loadPath);
+                var json = System.Text.Encoding.UTF8.GetString(fileBytes);
+                Debug.Log(json);
+                var newLocalizedLanguage = CreateInstance<LocalizedLanguage>();
+                JsonUtility.FromJsonOverwrite(json, newLocalizedLanguage); 
+                AssetDatabase.CreateAsset(newLocalizedLanguage, string.Format("{0}/{1}.asset", LanguageAssetPath, newLocalizedLanguage.LanguageName));
+            }
         }
 
         GUILayout.EndHorizontal();

@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using Newtonsoft.Json;
 
 [Serializable]
 public class KeyPhrase {
     public string Key;
     public string Phrase;
 
+    [JsonConstructor]
     public KeyPhrase(string key, string phrase) {
         Key = key;
         Phrase = phrase;

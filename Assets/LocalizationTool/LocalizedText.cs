@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
+[ExecuteInEditMode]
 public class LocalizedText : MonoBehaviour
 {
     public string Key { get; set; }
@@ -9,7 +10,7 @@ public class LocalizedText : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        //Text = GetComponent<Text>();
+        Text = GetComponent<Text>();
     }
 
     // Update is called once per frame
