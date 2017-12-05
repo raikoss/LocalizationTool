@@ -1,17 +1,20 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class LocalizedText : MonoBehaviour {
-    private string _key;
-    private Text _text;
+public class LocalizedText : MonoBehaviour
+{
+    public string Key { get; set; }
+    public Text Text { get; set; }
 
-	// Use this for initialization
-	void Start () {
-	    _text = GetComponent<Text>();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    // Use this for initialization
+    void Start()
+    {
+        //Text = GetComponent<Text>();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
 }

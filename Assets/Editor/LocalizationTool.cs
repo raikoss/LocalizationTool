@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Windows.Forms.SaveFileDialog;
+//using System.Windows.Forms.SaveFileDialog;
 
 public class LocalizationTool : EditorWindow
 {
@@ -17,7 +17,10 @@ public class LocalizationTool : EditorWindow
     //private List<string> _languages;
     public List<LocalizedLanguage> LocalizedLanguages { get; set; }
 
-    private int _currentLanguage = 0;
+    public int ActiveLanguage { get; set; }
+    public static LocalizationTool Instance { get; private set; }
+
+    private int _currentLanguage;
     private bool _showNewLanguage;
     private string _newLanguageName;
     private Vector2 _scrollPos;
@@ -26,6 +29,7 @@ public class LocalizationTool : EditorWindow
     public static void Init()
     {
         LocalizationTool window = (LocalizationTool)GetWindow(typeof(LocalizationTool), false, WindowName);
+        Instance = window;
         window.Show();
     }
 
@@ -36,17 +40,24 @@ public class LocalizationTool : EditorWindow
     void OnProjectChange() {
         ReloadAllLanguages();
     }
+    void OnDestroy()
+    {
+        AssetDatabase.SaveAssets();
+    }
 
     void ReloadAllLanguages() {
         LocalizedLanguages = Resources.LoadAll<LocalizedLanguage>("Languages").ToList();
     }
-
+    
     void OnGUI()
     {
         _scrollPos = EditorGUILayout.BeginScrollView(_scrollPos);
 
-        GUILayout.Label("Language");
+        GUILayout.Label("ACTIVE LANGUAGE");
+        ActiveLanguage = EditorGUILayout.Popup(ActiveLanguage, LocalizedLanguages.Select(x => x.LanguageName).ToArray());
+        GUILayout.Space(20);
 
+        GUILayout.Label("Language");
         GUILayout.BeginHorizontal();
         if (GUILayout.Button("<<") && _currentLanguage > 0)
         {
@@ -110,10 +121,6 @@ public class LocalizationTool : EditorWindow
 
         GUILayout.Space(20);
 
-        //TODO: Samme objekt brukes i flere språk
-        //TODO: Lage nye, like objekter om nytt språk kommer etter phrases
-        //TODO: Lage nye objekter i alle språk med ny phrase
-
         if (LocalizedLanguages.Count > 0) { 
             var currentLanguageKeyPhrases = LocalizedLanguages[_currentLanguage].KeyPhrases;
             for (int i = 0; i < currentLanguageKeyPhrases.Count; i++)
@@ -158,20 +165,20 @@ public class LocalizationTool : EditorWindow
             var json = JsonUtility.ToJson(LocalizedLanguages[_currentLanguage]);
             Debug.Log(json);
 
-            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+            //SaveFileDialog saveFileDialog1 = new SaveFileDialog();
 
-            saveFileDialog1.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
-            saveFileDialog1.FilterIndex = 2;
-            saveFileDialog1.RestoreDirectory = true;
+            //saveFileDialog1.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+            //saveFileDialog1.FilterIndex = 2;
+            //saveFileDialog1.RestoreDirectory = true;
 
-            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                if ((myStream = saveFileDialog1.OpenFile()) != null)
-                {
-                    // Code to write the stream goes here.
-                    myStream.Close();
-                }
-            }
+            //if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            //{
+            //    if ((myStream = saveFileDialog1.OpenFile()) != null)
+            //    {
+            //        // Code to write the stream goes here.
+            //        myStream.Close();
+            //    }
+            //}
         }
 
         //TODO: Hente fra JSON
