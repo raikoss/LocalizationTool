@@ -12,4 +12,9 @@ public class KeyPhrase {
         Key = key;
         Phrase = phrase;
     }
+
+    public KeyPhrase(KeyPhrase phrase) {
+        Key = phrase.Key;
+        Phrase = phrase.Phrase;
+    }
 }
