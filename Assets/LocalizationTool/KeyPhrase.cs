@@ -16,4 +16,16 @@ public class KeyPhrase {
         Key = phrase.Key;
         Phrase = phrase.Phrase;
     }
+
+    // Created by Resharper
+    protected bool Equals(KeyPhrase other) {
+        return string.Equals(Key, other.Key) && string.Equals(Phrase, other.Phrase);
+    }
+
+    // Don't ask me what this returns
+    public override int GetHashCode() {
+        unchecked {
+            return ((Key != null ? Key.GetHashCode() : 0) * 397) ^ (Phrase != null ? Phrase.GetHashCode() : 0);
+        }
+    }
 }
